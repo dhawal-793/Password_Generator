@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as Yup from 'yup'
 import {
   SafeAreaView,
@@ -23,8 +24,16 @@ const passwordSchema = Yup.object().shape({
 
 
 function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  
+  //  States
+  const [password, setPassword] = useState("")
+  const [isPasswordGenerated, setIsPasswordGenerated] = useState(false)
+  const [useLowerCase, setuseLowerCase] = useState(true)
+  const [useUperCase, setuseUperCase] = useState(false)
+  const [useNumbers, setUseNumbers] = useState(false)
+  const [useSymbols, setUseSymbols] = useState(false)
 
+  const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
