@@ -1,3 +1,4 @@
+import * as Yup from 'yup'
 import {
   SafeAreaView,
   ScrollView,
@@ -11,6 +12,14 @@ import {
 import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
+
+
+const passwordSchema = Yup.object().shape({
+  passwordLength: Yup.number()
+    .min(8, "Should be min of 8 characters")
+    .max(16, "Should be max of 16 characters")
+    .required('Length is Required'),
+})
 
 
 function App(): JSX.Element {
