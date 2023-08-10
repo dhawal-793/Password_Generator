@@ -24,7 +24,7 @@ const passwordSchema = Yup.object().shape({
 
 
 function App(): JSX.Element {
-  
+
   //  States
   const [password, setPassword] = useState("")
   const [isPasswordGenerated, setIsPasswordGenerated] = useState(false)
@@ -37,6 +37,34 @@ function App(): JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const generatePassword = (passwordLength: number) => {
+    let characters = '';
+    if (useLowerCase) characters += 'abcdefghijklmnopqrstuvwxyz';
+    if (useUperCase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (useNumbers) characters += '0123456789';
+    if (useSymbols) characters += '!@#$%^&*()_+';
+
+    setPassword(createPassword(characters, passwordLength))
+    setIsPasswordGenerated(true)
+  }
+
+  const createPassword = (characters: string, passwordLength: number) => {
+    let result = '';
+    for (let i = 0; i < passwordLength; i++) {
+      result += characters.charAt(Math.round(Math.random() * characters.length))
+    }
+    return result;
+  }
+
+  const resetPassword = () => {
+    setPassword("")
+    setIsPasswordGenerated(false)
+    setuseUperCase(false)
+    setuseLowerCase(true)
+    setUseNumbers(false)
+    setUseSymbols(false)
+  }
 
   return (
     <SafeAreaView style={backgroundStyle}>
