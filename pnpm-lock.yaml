@@ -14,6 +14,9 @@ dependencies:
   react-native:
     specifier: 0.72.3
     version: 0.72.3(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0)
+  react-native-bouncy-checkbox:
+    specifier: ^3.0.7
+    version: 3.0.7(react-native@0.72.3)(react@18.2.0)
   yup:
     specifier: ^1.2.0
     version: 1.2.0
@@ -5525,6 +5528,16 @@ packages:
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /react-native-bouncy-checkbox@3.0.7(react-native@0.72.3)(react@18.2.0):
+    resolution: {integrity: sha512-776TgMGt9wTpOQA1TcvFjL5VUn6o945wFYf3Ztqva62/vT2o3JAezLiP7hYh2Svd+PewfWBYSPMs4jeaSoS8Sg==}
+    peerDependencies:
+      react: '>= 16.x.x'
+      react-native: '>= 0.55.x'
+    dependencies:
+      react: 18.2.0
+      react-native: 0.72.3(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0)
+    dev: false
 
   /react-native@0.72.3(@babel/core@7.20.2)(@babel/preset-env@7.20.2)(react@18.2.0):
     resolution: {integrity: sha512-QqISi+JVmCssNP2FlQ4MWhlc4O/I00MRE1/GClvyZ8h/6kdsyk/sOirkYdZqX3+DrJfI3q+OnyMnsyaXIQ/5tQ==}

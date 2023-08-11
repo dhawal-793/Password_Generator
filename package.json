@@ -13,6 +13,7 @@
     "formik": "^2.4.3",
     "react": "18.2.0",
     "react-native": "0.72.3",
+    "react-native-bouncy-checkbox": "^3.0.7",
     "yup": "^1.2.0"
   },
   "devDependencies": {
