@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { Formik } from 'formik';
 import * as Yup from 'yup'
+
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   useColorScheme,
   View,
 } from 'react-native';
@@ -14,14 +18,12 @@ import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
 
-
 const passwordSchema = Yup.object().shape({
   passwordLength: Yup.number()
     .min(8, "Should be min of 8 characters")
     .max(16, "Should be max of 16 characters")
     .required('Length is Required'),
 })
-
 
 function App(): JSX.Element {
 
@@ -78,13 +80,73 @@ function App(): JSX.Element {
         <View style={styles.container}>
           <Text>PassWord Generator</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+
+        <Formik
+          initialValues={{ passwordLength: '' }}
+          validationSchema={passwordSchema}
+          onSubmit={(values) => {
+            console.log(values);
+            generatePassword(+values.passwordLength)
+
+          }}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            isValid,
+            handleChange,
+            handleReset,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <>
+              <View style={styles.inputWrapper}>
+                <View style={styles.inputColumn}>
+                  <Text style={styles.inputHeading}>Password Length</Text>
+                  {touched.passwordLength && errors.passwordLength && (
+                    <Text style={styles.errorText}> {errors.passwordLength}</Text>
+                  )}
+                </View>
+                <TextInput
+                  style={styles.inputStyle}
+                  value={values.passwordLength}
+                  onChangeText={handleChange('passwordLength')}
+                  placeholder='Ex. 8'
+                  keyboardType='numeric'
+                />
+              </View>
+              <View style={styles.inputWrapper}></View>
+              <View style={styles.inputWrapper}></View>
+              <View style={styles.inputWrapper}></View>
+              <View style={styles.inputWrapper}></View>
+              <View style={styles.formActions}>
+                <TouchableOpacity>
+                  <Text>Generate Password</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text> Reset Password </Text>
+                </TouchableOpacity>
+              </View>
+
+            </>
+          )}
+        </Formik>
+
+      </ScrollView >
+    </SafeAreaView >
   );
 }
 
 const styles = StyleSheet.create({
   container: {},
+  inputWrapper: {},
+  inputColumn: {},
+  inputStyle: {},
+  inputHeading: {},
+  errorText: {},
+  formActions: {},
 });
 
 export default App;
