@@ -17,6 +17,7 @@ import {
 import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const passwordSchema = Yup.object().shape({
   passwordLength: Yup.number()
@@ -117,10 +118,42 @@ function App(): JSX.Element {
                   keyboardType='numeric'
                 />
               </View>
-              <View style={styles.inputWrapper}></View>
-              <View style={styles.inputWrapper}></View>
-              <View style={styles.inputWrapper}></View>
-              <View style={styles.inputWrapper}></View>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.inputHeading}>Include Lowercase</Text>
+                <BouncyCheckbox
+                  disableBuiltInState
+                  isChecked={useLowerCase}
+                  onPress={() => setuseLowerCase(!useLowerCase)}
+                  fillColor='#EA580C'
+                />
+              </View>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.inputHeading}>Include Upercase</Text>
+                <BouncyCheckbox
+                  disableBuiltInState
+                  isChecked={useUperCase}
+                  onPress={() => setuseUperCase(!useUperCase)}
+                  fillColor='#E11D48'
+                />
+              </View>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.inputHeading}>Include Numbers</Text>
+                <BouncyCheckbox
+                  disableBuiltInState
+                  isChecked={useNumbers}
+                  onPress={() => setUseNumbers(!useNumbers)}
+                  fillColor='#3B82F6'
+                />
+              </View>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.inputHeading}>Include Symbols</Text>
+                <BouncyCheckbox
+                  disableBuiltInState
+                  isChecked={useSymbols}
+                  onPress={() => setUseSymbols(!useSymbols)}
+                  fillColor='#22C55E'
+                />
+              </View>
               <View style={styles.formActions}>
                 <TouchableOpacity>
                   <Text>Generate Password</Text>
