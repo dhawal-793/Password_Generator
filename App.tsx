@@ -176,6 +176,12 @@ function App(): JSX.Element {
           )}
         </Formik>
 
+        {isPasswordGenerated ? (
+          <View style={styles.card}>
+            <Text style={styles.cardHeading}>Password:</Text>
+            <Text style={styles.cardText}>{password}</Text>
+            </View>
+        ) : null}
       </ScrollView >
     </SafeAreaView >
   );
@@ -193,6 +199,9 @@ const styles = StyleSheet.create({
   primaryButtonText: {},
   secondaryButton: {},
   secondaryButtonText: {},
+  card: {},
+  cardHeading: {},
+  cardText: {},
 });
 
 export default App;
