@@ -155,14 +155,23 @@ function App(): JSX.Element {
                 />
               </View>
               <View style={styles.formActions}>
-                <TouchableOpacity>
-                  <Text>Generate Password</Text>
+                <TouchableOpacity
+                  disabled={!isValid}
+                  onPress={() => handleSubmit()}
+                  style={styles.primaryButton}
+                >
+                  <Text style={styles.primaryButtonText}>Generate Password</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text> Reset Password </Text>
+                <TouchableOpacity
+                  style={styles.secondaryButton}
+                  onPress={() => {
+                    handleReset()
+                    resetPassword()
+                  }}
+                >
+                  <Text style={styles.secondaryButtonText}> Reset Password </Text>
                 </TouchableOpacity>
               </View>
-
             </>
           )}
         </Formik>
@@ -180,6 +189,10 @@ const styles = StyleSheet.create({
   inputHeading: {},
   errorText: {},
   formActions: {},
+  primaryButton: {},
+  primaryButtonText: {},
+  secondaryButton: {},
+  secondaryButtonText: {},
 });
 
 export default App;
