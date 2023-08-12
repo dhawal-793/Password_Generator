@@ -106,7 +106,7 @@ function App(): JSX.Element {
                     keyboardType='numeric'
                   />
                 </View>
-                <View style={styles.inputWrapper}>
+                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
                   <Text style={styles.inputHeading}>Include Lowercase</Text>
                   <BouncyCheckbox
                     disableBuiltInState
@@ -115,7 +115,7 @@ function App(): JSX.Element {
                     fillColor='#EA580C'
                   />
                 </View>
-                <View style={styles.inputWrapper}>
+                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
                   <Text style={styles.inputHeading}>Include Upercase</Text>
                   <BouncyCheckbox
                     disableBuiltInState
@@ -124,7 +124,7 @@ function App(): JSX.Element {
                     fillColor='#E11D48'
                   />
                 </View>
-                <View style={styles.inputWrapper}>
+                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
                   <Text style={styles.inputHeading}>Include Numbers</Text>
                   <BouncyCheckbox
                     disableBuiltInState
@@ -133,7 +133,7 @@ function App(): JSX.Element {
                     fillColor='#3B82F6'
                   />
                 </View>
-                <View style={styles.inputWrapper}>
+                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
                   <Text style={styles.inputHeading}>Include Symbols</Text>
                   <BouncyCheckbox
                     disableBuiltInState
@@ -206,6 +206,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: "#ffffff",
+  },
+  checkBoxInputWrapper: {
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 8,
+    borderColor: '#ffffff',
   },
   errorContainer: {
     height: 30,
