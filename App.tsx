@@ -32,13 +32,18 @@ function App(): JSX.Element {
   const [useSymbols, setUseSymbols] = useState(false)
 
   const generatePassword = (passwordLength: number) => {
+
+    setPassword("")
+    setIsPasswordGenerated(false)
+
     let characters = '';
     if (useLowerCase) characters += 'abcdefghijklmnopqrstuvwxyz';
     if (useUperCase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (useNumbers) characters += '0123456789';
     if (useSymbols) characters += '!@#$%^&*()_+';
 
-    setPassword(createPassword(characters, passwordLength))
+    const newPassword = createPassword(characters, passwordLength)
+    setPassword(newPassword)
     setIsPasswordGenerated(true)
   }
 
