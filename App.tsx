@@ -146,18 +146,18 @@ function App(): JSX.Element {
                   <TouchableOpacity
                     // disabled={!isValid}
                     onPress={() => handleSubmit()}
-                    style={styles.primaryButton}
+                    style={[styles.button, { backgroundColor: '#03C6C7' }]}
                   >
-                    <Text style={styles.primaryButtonText}>Generate Password</Text>
+                    <Text style={styles.buttonText}>Generate Password</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={styles.secondaryButton}
+                    style={[styles.button, { backgroundColor: '#758283' }]}
                     onPress={() => {
                       handleReset()
                       resetPassword()
                     }}
                   >
-                    <Text style={styles.secondaryButtonText}> Reset Password </Text>
+                    <Text style={styles.buttonText}> Reset Password </Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -199,7 +199,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginVertical: 10,
   },
-  inputColumn: {},
+  inputColumn: {
+    flexDirection: 'column',
+  },
   inputStyle: {
     borderWidth: 2,
     paddingVertical: 2,
@@ -233,25 +235,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     marginTop: 20,
+    marginLeft: 'auto',
+    marginRight: 5,
   },
-  primaryButton: {
-    backgroundColor: '#03C6C7',
+  button: {
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 5,
   },
-  primaryButtonText: {
-    color: '#ffffff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  secondaryButton: {
-    backgroundColor: '#758283',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 5,
-  },
-  secondaryButtonText: {
+  buttonText: {
     color: '#ffffff',
     fontSize: 14,
     fontWeight: '600',
