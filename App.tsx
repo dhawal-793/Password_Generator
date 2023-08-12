@@ -1,23 +1,18 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import * as Yup from 'yup'
 
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 
-import {
-  Colors
-} from 'react-native/Libraries/NewAppScreen';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const passwordSchema = Yup.object().shape({
   passwordLength: Yup.number()
@@ -35,11 +30,6 @@ function App(): JSX.Element {
   const [useUperCase, setuseUperCase] = useState(false)
   const [useNumbers, setUseNumbers] = useState(false)
   const [useSymbols, setUseSymbols] = useState(false)
-
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   const generatePassword = (passwordLength: number) => {
     let characters = '';
@@ -70,118 +60,109 @@ function App(): JSX.Element {
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
+    <SafeAreaView>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
           <Text>PassWord Generator</Text>
-        </View>
-
-        <Formik
-          initialValues={{ passwordLength: '' }}
-          validationSchema={passwordSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            generatePassword(+values.passwordLength)
-
-          }}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            isValid,
-            handleChange,
-            handleReset,
-            handleSubmit,
-            isSubmitting,
-            /* and other goodies */
-          }) => (
-            <>
-              <View style={styles.inputWrapper}>
-                <View style={styles.inputColumn}>
-                  <Text style={styles.inputHeading}>Password Length</Text>
-                  {touched.passwordLength && errors.passwordLength && (
-                    <Text style={styles.errorText}> {errors.passwordLength}</Text>
-                  )}
+          <Formik
+            initialValues={{ passwordLength: '' }}
+            validationSchema={passwordSchema}
+            onSubmit={(values) => {
+              console.log(values);
+              generatePassword(+values.passwordLength)
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              isValid,
+              handleChange,
+              handleReset,
+              handleSubmit,
+              isSubmitting,
+              /* and other goodies */
+            }) => (
+              <>
+                <View style={styles.inputWrapper}>
+                  <View style={styles.inputColumn}>
+                    <Text style={styles.inputHeading}>Password Length</Text>
+                    {touched.passwordLength && errors.passwordLength && (
+                      <Text style={styles.errorText}> {errors.passwordLength}</Text>
+                    )}
+                  </View>
+                  <TextInput
+                    style={styles.inputStyle}
+                    value={values.passwordLength}
+                    onChangeText={handleChange('passwordLength')}
+                    placeholder='Ex. 8'
+                    keyboardType='numeric'
+                  />
                 </View>
-                <TextInput
-                  style={styles.inputStyle}
-                  value={values.passwordLength}
-                  onChangeText={handleChange('passwordLength')}
-                  placeholder='Ex. 8'
-                  keyboardType='numeric'
-                />
-              </View>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputHeading}>Include Lowercase</Text>
-                <BouncyCheckbox
-                  disableBuiltInState
-                  isChecked={useLowerCase}
-                  onPress={() => setuseLowerCase(!useLowerCase)}
-                  fillColor='#EA580C'
-                />
-              </View>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputHeading}>Include Upercase</Text>
-                <BouncyCheckbox
-                  disableBuiltInState
-                  isChecked={useUperCase}
-                  onPress={() => setuseUperCase(!useUperCase)}
-                  fillColor='#E11D48'
-                />
-              </View>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputHeading}>Include Numbers</Text>
-                <BouncyCheckbox
-                  disableBuiltInState
-                  isChecked={useNumbers}
-                  onPress={() => setUseNumbers(!useNumbers)}
-                  fillColor='#3B82F6'
-                />
-              </View>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputHeading}>Include Symbols</Text>
-                <BouncyCheckbox
-                  disableBuiltInState
-                  isChecked={useSymbols}
-                  onPress={() => setUseSymbols(!useSymbols)}
-                  fillColor='#22C55E'
-                />
-              </View>
-              <View style={styles.formActions}>
-                <TouchableOpacity
-                  disabled={!isValid}
-                  onPress={() => handleSubmit()}
-                  style={styles.primaryButton}
-                >
-                  <Text style={styles.primaryButtonText}>Generate Password</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.secondaryButton}
-                  onPress={() => {
-                    handleReset()
-                    resetPassword()
-                  }}
-                >
-                  <Text style={styles.secondaryButtonText}> Reset Password </Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
-        </Formik>
-
-        {isPasswordGenerated ? (
-          <View style={styles.card}>
-            <Text style={styles.cardHeading}>Password:</Text>
-            <Text style={styles.cardText}>{password}</Text>
+                <View style={styles.inputWrapper}>
+                  <Text style={styles.inputHeading}>Include Lowercase</Text>
+                  <BouncyCheckbox
+                    disableBuiltInState
+                    isChecked={useLowerCase}
+                    onPress={() => setuseLowerCase(!useLowerCase)}
+                    fillColor='#EA580C'
+                  />
+                </View>
+                <View style={styles.inputWrapper}>
+                  <Text style={styles.inputHeading}>Include Upercase</Text>
+                  <BouncyCheckbox
+                    disableBuiltInState
+                    isChecked={useUperCase}
+                    onPress={() => setuseUperCase(!useUperCase)}
+                    fillColor='#E11D48'
+                  />
+                </View>
+                <View style={styles.inputWrapper}>
+                  <Text style={styles.inputHeading}>Include Numbers</Text>
+                  <BouncyCheckbox
+                    disableBuiltInState
+                    isChecked={useNumbers}
+                    onPress={() => setUseNumbers(!useNumbers)}
+                    fillColor='#3B82F6'
+                  />
+                </View>
+                <View style={styles.inputWrapper}>
+                  <Text style={styles.inputHeading}>Include Symbols</Text>
+                  <BouncyCheckbox
+                    disableBuiltInState
+                    isChecked={useSymbols}
+                    onPress={() => setUseSymbols(!useSymbols)}
+                    fillColor='#22C55E'
+                  />
+                </View>
+                <View style={styles.formActions}>
+                  <TouchableOpacity
+                    disabled={!isValid}
+                    onPress={() => handleSubmit()}
+                    style={styles.primaryButton}
+                  >
+                    <Text style={styles.primaryButtonText}>Generate Password</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.secondaryButton}
+                    onPress={() => {
+                      handleReset()
+                      resetPassword()
+                    }}
+                  >
+                    <Text style={styles.secondaryButtonText}> Reset Password </Text>
+                  </TouchableOpacity>
+                </View>
+              </>
+            )}
+          </Formik>
+          {isPasswordGenerated ? (
+            <View style={styles.card}>
+              <Text style={styles.cardHeading}>Password:</Text>
+              <Text selectable={true} style={styles.cardText}>{password}</Text>
             </View>
-        ) : null}
+          ) : null}
+        </View>
       </ScrollView >
     </SafeAreaView >
   );
