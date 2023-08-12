@@ -164,7 +164,10 @@ function App(): JSX.Element {
           {isPasswordGenerated ? (
             <View style={styles.card}>
               <Text style={styles.cardHeading}>Password:</Text>
-              <Text selectable={true} style={styles.cardText}>{password}</Text>
+              <View style={styles.passwordContainer}>
+                <Text selectable={true} style={styles.password}>{password}</Text>
+              </View>
+              <Text style={styles.description}>Long Press to Copy</Text>
             </View>
           ) : null}
         </View>
@@ -234,9 +237,38 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-  card: {},
-  cardHeading: {},
-  cardText: {},
+  card: {
+    margin: 20,
+    marginTop: 60,
+    borderRadius: 12,
+    height: 200,
+    padding: 16,
+    backgroundColor: '#ffffff',
+  },
+  cardHeading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  passwordContainer: {
+    padding: 6,
+    backgroundColor: '#fff000',
+    borderRadius: 8,
+    width: 'auto',
+    marginVertical: 8,
+  },
+  password: {
+    color: '#000000',
+    fontSize: 20,
+    textAlign: 'center',
+    marginVertical: 8
+  },
+  description: {
+    fontSize: 12,
+    color: '#758283',
+    textAlign: 'right',
+    marginRight: 4,
+  }
 });
 
 export default App;
