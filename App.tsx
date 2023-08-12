@@ -31,17 +31,41 @@ function App(): JSX.Element {
   const [useNumbers, setUseNumbers] = useState(false)
   const [useSymbols, setUseSymbols] = useState(false)
 
-  const generatePassword = (passwordLength: number) => {
+  const checkInputs = [
+    {
+      heading: 'Include Lowercase',
+      isChecked: useLowerCase,
+      onPress: setuseLowerCase,
+      color: "#EA580C"
+    },
+    {
+      heading: 'Include Upercase',
+      isChecked: useUperCase,
+      onPress: setuseUperCase,
+      color: "#E11D48"
+    },
+    {
+      heading: 'Include Numbers',
+      isChecked: useNumbers,
+      onPress: setUseNumbers,
+      color: "#3B82F6"
+    },
+    {
+      heading: 'Include Symbols',
+      isChecked: useSymbols,
+      onPress: setUseSymbols,
+      color: "#22C55E"
+    },
+  ]
 
+  const generatePassword = (passwordLength: number) => {
     setPassword("")
     setIsPasswordGenerated(false)
-
     let characters = '';
     if (useLowerCase) characters += 'abcdefghijklmnopqrstuvwxyz';
     if (useUperCase) characters += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if (useNumbers) characters += '0123456789';
     if (useSymbols) characters += '!@#$%^&*()_+';
-
     const newPassword = createPassword(characters, passwordLength)
     setPassword(newPassword)
     setIsPasswordGenerated(true)
@@ -89,12 +113,9 @@ function App(): JSX.Element {
               values,
               errors,
               touched,
-              isValid,
               handleChange,
               handleReset,
               handleSubmit,
-              isSubmitting,
-              /* and other goodies */
             }) => (
               <>
                 <View style={styles.inputContainer}>
@@ -114,42 +135,14 @@ function App(): JSX.Element {
                     )}
                   </View>
                 </View>
-                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
-                  <Text style={styles.inputHeading}>Include Lowercase</Text>
-                  <BouncyCheckbox
-                    disableBuiltInState
-                    isChecked={useLowerCase}
-                    onPress={() => setuseLowerCase(!useLowerCase)}
-                    fillColor='#EA580C'
-                  />
-                </View>
-                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
-                  <Text style={styles.inputHeading}>Include Upercase</Text>
-                  <BouncyCheckbox
-                    disableBuiltInState
-                    isChecked={useUperCase}
-                    onPress={() => setuseUperCase(!useUperCase)}
-                    fillColor='#E11D48'
-                  />
-                </View>
-                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
-                  <Text style={styles.inputHeading}>Include Numbers</Text>
-                  <BouncyCheckbox
-                    disableBuiltInState
-                    isChecked={useNumbers}
-                    onPress={() => setUseNumbers(!useNumbers)}
-                    fillColor='#3B82F6'
-                  />
-                </View>
-                <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
-                  <Text style={styles.inputHeading}>Include Symbols</Text>
-                  <BouncyCheckbox
-                    disableBuiltInState
-                    isChecked={useSymbols}
-                    onPress={() => setUseSymbols(!useSymbols)}
-                    fillColor='#22C55E'
-                  />
-                </View>
+                {
+                  checkInputs.map((input) => (
+                    <CheckInput
+                      key={input.heading}
+                      {...input}
+                    />
+                  ))
+                }
                 <View style={styles.formActions}>
                   <TouchableOpacity
                     // disabled={!isValid}
