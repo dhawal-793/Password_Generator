@@ -68,7 +68,7 @@ function App(): JSX.Element {
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
-          <Text>PassWord Generator</Text>
+          <Text style={styles.heading}>PassWord Generator</Text>
           <Formik
             initialValues={{ passwordLength: '' }}
             validationSchema={passwordSchema}
@@ -183,6 +183,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     height: "100%",
+  },
+  heading: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#35BDD0'
   },
   inputWrapper: {
     flex: 1,
