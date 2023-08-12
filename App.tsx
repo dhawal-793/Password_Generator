@@ -92,9 +92,11 @@ function App(): JSX.Element {
                 <View style={styles.inputWrapper}>
                   <View style={styles.inputColumn}>
                     <Text style={styles.inputHeading}>Password Length</Text>
-                    {touched.passwordLength && errors.passwordLength && (
-                      <Text style={styles.errorText}> {errors.passwordLength}</Text>
-                    )}
+                    <View style={styles.errorContainer}>
+                      {touched.passwordLength && errors.passwordLength && (
+                        <Text style={styles.errorText}> {errors.passwordLength}</Text>
+                      )}
+                    </View>
                   </View>
                   <TextInput
                     style={[styles.inputStyle, { borderColor: touched.passwordLength && errors.passwordLength ? '#e11d48' : '#ffffff' }]}
@@ -142,7 +144,7 @@ function App(): JSX.Element {
                 </View>
                 <View style={styles.formActions}>
                   <TouchableOpacity
-                    disabled={!isValid}
+                    // disabled={!isValid}
                     onPress={() => handleSubmit()}
                     style={styles.primaryButton}
                   >
@@ -204,6 +206,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: "#ffffff",
+  },
+  errorContainer: {
+    height: 30,
+    width: 250,
   },
   errorText: {
     fontSize: 13,
