@@ -64,11 +64,19 @@ function App(): JSX.Element {
     setUseSymbols(false)
   }
 
+  const checkErrorMessage = (message: string, password: string) => {
+    const errorMessage = `passwordLength must be a \`number\` type, but the final value was: \`NaN\` (cast from the value \`"${password}"\`).`
+    if (message === errorMessage) {
+      return "Should be a Number"
+    }
+    return message
+  }
+
   return (
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
-          <Text style={styles.heading}>PassWord Generator</Text>
+          <Text style={styles.heading}>Password Generator</Text>
           <Formik
             initialValues={{ passwordLength: '' }}
             validationSchema={passwordSchema}
@@ -89,22 +97,22 @@ function App(): JSX.Element {
               /* and other goodies */
             }) => (
               <>
-                <View style={styles.inputWrapper}>
-                  <View style={styles.inputColumn}>
+                <View style={styles.inputContainer}>
+                  <View style={styles.inputWrapper}>
                     <Text style={styles.inputHeading}>Password Length</Text>
-                    <View style={styles.errorContainer}>
-                      {touched.passwordLength && errors.passwordLength && (
-                        <Text style={styles.errorText}> {errors.passwordLength}</Text>
-                      )}
-                    </View>
+                    <TextInput
+                      style={[styles.inputStyle, { borderColor: touched.passwordLength && errors.passwordLength ? '#e11d48' : '#ffffff' }]}
+                      value={values.passwordLength}
+                      onChangeText={handleChange('passwordLength')}
+                      placeholder='Ex. 8'
+                      keyboardType='numeric'
+                    />
                   </View>
-                  <TextInput
-                    style={[styles.inputStyle, { borderColor: touched.passwordLength && errors.passwordLength ? '#e11d48' : '#ffffff' }]}
-                    value={values.passwordLength}
-                    onChangeText={handleChange('passwordLength')}
-                    placeholder='Ex. 8'
-                    keyboardType='numeric'
-                  />
+                  <View style={styles.errorContainer}>
+                    {touched.passwordLength && errors.passwordLength && (
+                      <Text style={styles.errorText} selectable={true}> {checkErrorMessage(errors.passwordLength, values.passwordLength)}</Text>
+                    )}
+                  </View>
                 </View>
                 <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
                   <Text style={styles.inputHeading}>Include Lowercase</Text>
@@ -191,10 +199,13 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     color: '#35BDD0'
   },
+  inputContainer: {
+    flexDirection: 'column'
+  },
   inputWrapper: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     marginHorizontal: 5,
     marginVertical: 10,
@@ -206,10 +217,11 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     paddingVertical: 2,
     paddingHorizontal: 12,
-    width: 100,
-    height: 30,
+    width: 150,
+    height: 32,
     borderRadius: 8,
     color: '#ffffff',
+    fontSize: 18,
   },
   inputHeading: {
     fontSize: 20,
@@ -224,7 +236,9 @@ const styles = StyleSheet.create({
   },
   errorContainer: {
     height: 30,
-    width: 250,
+    width: "100%",
+    marginTop: -8,
+    paddingHorizontal: 10,
   },
   errorText: {
     fontSize: 13,
