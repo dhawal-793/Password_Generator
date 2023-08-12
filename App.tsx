@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Formik } from 'formik';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import * as Yup from 'yup'
@@ -297,3 +297,25 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+interface CheckInputProps {
+  heading: string;
+  isChecked: boolean;
+  onPress: (value: boolean) => void;
+  color: string;
+}
+
+const CheckInput: FC<CheckInputProps> = ({ heading, isChecked, onPress, color }) => {
+  return (
+    <View style={[styles.inputWrapper, styles.checkBoxInputWrapper]}>
+      <Text style={styles.inputHeading}>{heading}</Text>
+      <BouncyCheckbox
+        disableBuiltInState
+        isChecked={isChecked}
+        onPress={() => onPress(!isChecked)}
+        fillColor={color}
+      />
+    </View>
+  )
+}
