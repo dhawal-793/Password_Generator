@@ -174,13 +174,29 @@ function App(): JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  container: {},
-  inputWrapper: {},
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 16,
+    height: "100%",
+  },
+  inputWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    marginHorizontal: 5,
+    marginVertical: 10,
+  },
   inputColumn: {},
   inputStyle: {},
   inputHeading: {},
   errorText: {},
-  formActions: {},
+  formActions: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 10,
+    marginTop: 20,
+  },
   primaryButton: {},
   primaryButtonText: {},
   secondaryButton: {},
