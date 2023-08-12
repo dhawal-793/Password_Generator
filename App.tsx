@@ -97,7 +97,7 @@ function App(): JSX.Element {
                     )}
                   </View>
                   <TextInput
-                    style={styles.inputStyle}
+                    style={[styles.inputStyle, { borderColor: touched.passwordLength && errors.passwordLength ? '#e11d48' : '#ffffff' }]}
                     value={values.passwordLength}
                     onChangeText={handleChange('passwordLength')}
                     placeholder='Ex. 8'
